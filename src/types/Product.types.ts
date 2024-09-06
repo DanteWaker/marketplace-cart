@@ -3,7 +3,7 @@ export type TRating = {
   rate: number
 }
 
-export type TProducts = {
+export type TProduct = {
   id: number
   title: string
   price: number

@@ -19,7 +19,6 @@ axiosClient.interceptors.request.use(
 
 axiosClient.interceptors.response.use(
   (response) => {
-    console.log(response)
     return response
   },
   (error) => {
