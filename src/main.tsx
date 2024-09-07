@@ -7,6 +7,8 @@ import './styles/index.css'
 import { routeTree } from './routeTree.gen'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from './services/queryClient'
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
 
 // Create a new router instance
 const router = createRouter({ routeTree })
@@ -24,9 +26,12 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </Provider>
+
     </StrictMode>,
   )
 }

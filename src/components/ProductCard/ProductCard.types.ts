@@ -1,4 +1,4 @@
-import { TProduct } from './../../types/Product.types'
+import { TCartProduct } from '../../types/Cart.types'
 export type ProductCardProps = {
-  product: TProduct
+  product: TCartProduct
 }
