@@ -2,7 +2,13 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { useCart } from "../../hooks/useCart"
 import { MdDelete } from "react-icons/md";
 export function Cart() {
-  const { productsCart, removeProductFromCart, incrementProductCartQuantity, decrementProductCartQuantity, totalProductsPrice } = useCart()
+  const {
+    productsCart,
+    removeProductFromCart,
+    incrementProductCartQuantity,
+    decrementProductCartQuantity,
+    totalProductsPrice } = useCart()
+
   return (
     <section className="grid grid-cols-2 gap-8 w-full justify-center">
       <section className="h-[90vh] flex flex-col justify-start items-center gap-4 overflow-y-auto">

@@ -14,9 +14,7 @@ export function Header() {
       </h1>
       <div className="relative flex">
         <Link to="/cart">
-
           <CiShoppingCart className="w-[3rem] h-[3rem]" />
-
           {
             quantityOfItemsOnCart() && <div className="absolute h-6 w-6 top-1 right-1 rounded-full bg-orange-500 text-white flex justify-center items-center">
               {quantityOfItemsOnCart()}

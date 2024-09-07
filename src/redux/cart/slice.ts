@@ -1,5 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { TCart } from '../../types/Cart.types'
+import {
+  addNewProductToCart,
+  findProductInCart,
+  removeProductFromCart,
+  updateProductQuantity,
+  updateProductQuantityByOne,
+} from './functions'
 
 const initialState: TCart = {
   products: [],
@@ -10,40 +17,23 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addProduct: (state, action) => {
-      const productIsAlreadyInCart = state.products.some(
-        (product) => product.id === action.payload.id,
-      )
+      const productId = action.payload.id
+      const existingProduct = findProductInCart(state, productId)
 
-      if (productIsAlreadyInCart) {
-        state.products = state.products.map((product) =>
-          product.id === action.payload.id
-            ? { ...product, quantity: product.quantity + 1 }
-            : product,
-        )
-
-        return
+      if (existingProduct) {
+        updateProductQuantity(state, productId)
+      } else {
+        addNewProductToCart(state, action)
       }
-
-      state.products = [...state.products, { ...action.payload, quantity: 1 }]
     },
     incrementProductQuantity: (state, action) => {
-      state.products = state.products.map((product) =>
-        product.id === action.payload.id
-          ? { ...product, quantity: product.quantity + 1 }
-          : product,
-      )
+      updateProductQuantityByOne(state, action.payload.id, 1)
     },
     decrementProductQuantity: (state, action) => {
-      state.products = state.products.map((product) => {
-        return product.id === action.payload.id
-          ? { ...product, quantity: product.quantity - 1 }
-          : product
-      })
+      updateProductQuantityByOne(state, action.payload.id, -1)
     },
     removeProduct: (state, action) => {
-      state.products = state.products.filter(
-        (product) => product.id !== action.payload.id,
-      )
+      removeProductFromCart(state, action.payload.id)
     },
   },
 })

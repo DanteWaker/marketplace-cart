@@ -15,5 +15,4 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <button className="bg-green-300 text-white p-1 rounded-md hover:bg-green-500" onClick={() => addProductToCart(product)}> Adicionar ao carrinho</button>
     </div>
   )
-
 }

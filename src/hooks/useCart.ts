@@ -17,21 +17,30 @@ export function useCart() {
     return products
   }
 
+  const sumQuantityWithAccumulatedValues = (
+    accumulator: number,
+    currentValue: TCartProduct,
+  ) => {
+    return accumulator + currentValue.quantity
+  }
+
   const quantityOfItemsOnCart = () => {
     const quantityOfItems =
       products.length > 0 &&
-      products.reduce((accumulator: number, currentValue: TCartProduct) => {
-        return accumulator + currentValue.quantity
-      }, 0)
+      products.reduce(sumQuantityWithAccumulatedValues, 0)
     return quantityOfItems
+  }
+
+  const sumPriceWithPreviusValue = (
+    accumulator: number,
+    currentValue: TCartProduct,
+  ) => {
+    return accumulator + Number(currentValue.price) * currentValue.quantity
   }
 
   const totalProductsPrice = () => {
     const totalPrice =
-      products.length > 0 &&
-      products.reduce((accumulator: number, currentValue: TCartProduct) => {
-        return accumulator + Number(currentValue.price) * currentValue.quantity
-      }, 0)
+      products.length > 0 && products.reduce(sumPriceWithPreviusValue, 0)
     return Number(totalPrice).toFixed(2).toString()
   }
 
@@ -44,7 +53,9 @@ export function useCart() {
   }
 
   const decrementProductCartQuantity = (product: TCartProduct) => {
-    if (product.quantity - 1 === 0) {
+    const NEXT_VALUE_IS_ZERO = product.quantity - 1 === 0
+
+    if (NEXT_VALUE_IS_ZERO) {
       dispatch(removeProduct(product))
     }
     dispatch(decrementProductQuantity(product))
