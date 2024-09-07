@@ -1,12 +1,12 @@
 import { CiShoppingCart } from "react-icons/ci";
-import { useCart } from "../hooks/useCart"
+import { useCart } from "../../hooks/useCart"
 import { Link } from "@tanstack/react-router";
 
-export function Header() {
+export const Header = () => {
   const { quantityOfItemsOnCart } = useCart()
 
   return (
-    <div className="flex justify-between items-center w-full p-8">
+    <header className="flex justify-between items-center w-full p-8">
       <h1 className="font-bold text-2xl">
         <Link to="/">
           Products
@@ -22,6 +22,6 @@ export function Header() {
           }
         </Link>
       </div>
-    </div>
+    </header>
   )
 }
