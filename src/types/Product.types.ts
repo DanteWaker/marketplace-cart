@@ -3,7 +3,7 @@ export type TRating = {
   rate: number
 }
 
-export type TProducts = {
+export interface TProduct  {
   id: number
   title: string
   price: number
@@ -12,3 +12,4 @@ export type TProducts = {
   image: string
   rating: TRating[]
 }
+
